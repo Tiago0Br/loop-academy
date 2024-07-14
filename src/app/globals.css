@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-text: #fff;
+  --color-error: #980000;
+  --color-paper: #232323;
+  --color-primary: #009688;
+  --color-background: #000000;
+  --color-primary-contrast: #fff;
+}
+
+html[light] {
+  --color-text: #000;
+  --color-error: #980000;
+  --color-paper: #fff;
+  --color-primary: #009688;
+  --color-background: #cacaca;
+  --color-primary-contrast: #fff;
+}
+
+html,
+body {
+  @apply bg-background text-text w-screen h-screen underline-offset-4;
+}
+
+a {
+  @apply hover:underline active:opacity-50 transition-opacity;
+}
