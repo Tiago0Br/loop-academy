@@ -6,5 +6,9 @@ export const metadata: Metadata = {
 }
 
 export default function Cursos() {
-  return <Section />
+  return (
+    <main>
+      <Section title="Todos os Cursos" variant="h-list" />
+    </main>
+  )
 }

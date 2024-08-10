@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-interface ICardProps {
+export interface ICardProps {
   href: string
   image: string
   title: string
@@ -15,7 +15,7 @@ export function Card({ href, image, title, description }: ICardProps) {
         <Image
           height={0}
           width={1000}
-          className="aspect-video object-cover rounded sm:rounded-2xl md:rounded-[2.25rem]"
+          className="aspect-video object-cover rounded sm:rounded-2xl md:rounded-[.5rem]"
           src={image}
           alt={`Logo do curso "${title}"`}
           draggable={false}
