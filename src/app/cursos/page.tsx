@@ -1,3 +1,4 @@
+import { Section } from '@/components/section/Section'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -5,5 +6,5 @@ export const metadata: Metadata = {
 }
 
 export default function Cursos() {
-  return <h1>Cursos</h1>
+  return <Section />
 }
