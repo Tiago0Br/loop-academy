@@ -10,19 +10,22 @@ const defaultCards: ICardProps[] = [
   {
     href: '/cursos/123',
     image: 'https://i.ytimg.com/vi/bP47qRVRqQs/hqdefault.jpg',
-    title: 'Curso API Rest com Node e Typescript',
+    title:
+      'Curso API Rest com Node e Typescript, Curso API Rest com Node e Typescript, Curso API Rest com Node e Typescript, Curso API Rest com Node e Typescript.',
     description: 'Descrição do curso',
   },
   {
     href: '/cursos/123',
     image: 'https://i.ytimg.com/vi/bP47qRVRqQs/hqdefault.jpg',
-    title: 'Curso API Rest com Node e Typescript',
+    title:
+      'Curso API Rest com Node e Typescript, Curso API Rest com Node e Typescript, Curso API Rest com Node e Typescript, Curso API Rest com Node e Typescript.',
     description: 'Descrição do curso',
   },
   {
     href: '/cursos/123',
     image: 'https://i.ytimg.com/vi/bP47qRVRqQs/hqdefault.jpg',
-    title: 'Curso API Rest com Node e Typescript',
+    title:
+      'Curso API Rest com Node e Typescript, Curso API Rest com Node e Typescript, Curso API Rest com Node e Typescript, Curso API Rest com Node e Typescript.',
     description: 'Descrição do curso',
   },
 ]

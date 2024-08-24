@@ -7,8 +7,10 @@ export const metadata: Metadata = {
 
 export default function Cursos() {
   return (
-    <main>
-      <Section title="Todos os Cursos" variant="h-list" />
+    <main className="mt-8 flex justify-center">
+      <div className="min-[920px]:max-w-[920px]">
+        <Section title="Todos os Cursos" />
+      </div>
     </main>
   )
 }
