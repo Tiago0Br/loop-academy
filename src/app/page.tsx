@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main className="mt-8 flex justify-center">
-      <div className="min-[920px]:max-w-[920px]">
+      <div className="max-w-full min-[920px]:max-w-[920px]">
         <Section title="Página inicial" variant="h-list" />
       </div>
     </main>

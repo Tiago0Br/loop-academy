@@ -20,6 +20,10 @@ html[light] {
   --color-primary-contrast: #fff;
 }
 
+* {
+  @apply outline-primary outline-1 -outline-offset-2
+}
+
 html,
 body {
   overflow: overlay;

@@ -15,9 +15,18 @@ export function Header() {
     setDrawserVisible(false)
   }, [currentPath])
 
+  useEffect(() => {
+    const handle = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setDrawserVisible(false)
+    }
+
+    window.addEventListener('keydown', handle)
+    return () => window.removeEventListener('keydown', handle)
+  }, [])
+
   return (
     <nav
-      className="flex items-center gap-6 justify-start bg-primary px-6 py-2
+      className="sticky top-0 flex items-center gap-6 justify-start bg-primary px-6 py-2
         sm:py-4 md:justify-center"
     >
       <button className="sm:hidden" onClick={() => setDrawserVisible(true)}>
@@ -26,7 +35,7 @@ export function Header() {
       <ul className="flex gap-4 items-center">
         <li className="my-2">
           <Link
-            className="uppercase font-bold border-2 rounded-md py-2 px-1"
+            className="outline-offset-4 uppercase font-bold border-2 rounded-md py-2 px-1"
             href="/"
           >
             codaserse
@@ -36,7 +45,7 @@ export function Header() {
           <Link
             href="/"
             data-active={currentPath === '/'}
-            className="data-[active=true]:underline"
+            className="outline-offset-4 data-[active=true]:underline"
           >
             Página inicial
           </Link>
@@ -44,7 +53,7 @@ export function Header() {
         <li className="hidden sm:inline">
           <Link
             data-active={currentPath === '/cursos'}
-            className="data-[active=true]:underline"
+            className="outline-offset-4 data-[active=true]:underline"
             href="/cursos"
           >
             Cursos
@@ -54,7 +63,7 @@ export function Header() {
           <Link
             href="https://blog.codarse.com"
             target="_blank"
-            className="flex items-center gap-1"
+            className="outline-offset-4 flex items-center gap-1"
           >
             Blog
             <MdOutlineOpenInNew />
@@ -65,8 +74,10 @@ export function Header() {
       <div
         onClick={() => setDrawserVisible(false)}
         data-visible={drawserVisible}
-        className="data-[visible=false]:-translate-x-full fixed top-0 left-0 right-0 bottom-0 
-        bg-gradient-to-r from-background to-transparent transition-transform"
+        className="
+            sm:hidden data-[visible=false]:-translate-x-full fixed top-0 left-0 right-0 bottom-0 
+            bg-gradient-to-r from-background to-transparent transition-transform
+          "
       >
         <ul
           className="w-60 h-full flex flex-col p-4 gap-4 bg-background"
@@ -104,7 +115,7 @@ export function Header() {
         </ul>
       </div>
 
-      <h1 className="sm:hidden">{title}</h1>
+      <h1 className="sm:hidden line-clamp-1">{title}</h1>
     </nav>
   )
 }
