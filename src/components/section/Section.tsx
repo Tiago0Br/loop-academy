@@ -1,3 +1,7 @@
+'use client'
+
+import { MdOutlineChevronLeft, MdOutlineChevronRight } from 'react-icons/md'
+import { useRef } from 'react'
 import { Card, ICardProps } from '@/components/card/Card'
 
 interface ISectionProps {
@@ -28,6 +32,13 @@ const defaultCards: ICardProps[] = [
       'Curso API Rest com Node e Typescript, Curso API Rest com Node e Typescript, Curso API Rest com Node e Typescript, Curso API Rest com Node e Typescript.',
     description: 'Descrição do curso',
   },
+  {
+    href: '/cursos/123',
+    image: 'https://i.ytimg.com/vi/bP47qRVRqQs/hqdefault.jpg',
+    title:
+      'Curso API Rest com Node e Typescript, Curso API Rest com Node e Typescript, Curso API Rest com Node e Typescript, Curso API Rest com Node e Typescript.',
+    description: 'Descrição do curso',
+  },
 ]
 
 export function Section({
@@ -35,10 +46,31 @@ export function Section({
   variant = 'grid',
   cards = defaultCards,
 }: ISectionProps) {
+  const scrollRef = useRef<HTMLUListElement>(null)
+
+  const handleScroll = (direction: 'left' | 'right') => {
+    if (!scrollRef.current) return
+
+    if (direction === 'left') {
+      scrollRef.current.scrollBy({
+        left: -300,
+        behavior: 'smooth',
+      })
+
+      return
+    }
+
+    scrollRef.current.scrollBy({
+      left: 300,
+      behavior: 'smooth',
+    })
+  }
+
   return (
     <section className="flex flex-col gap-4 px-4">
       <h2 className="font-bold text-xl">{title}</h2>
       <ul
+        ref={scrollRef}
         data-variant={variant}
         className="
           grid gap-2 grid-cols-1 sm:grid-cols-none
@@ -46,6 +78,13 @@ export function Section({
           data-[variant=h-list]:sm:grid-flow-col data-[variant=h-list]:sm:overflow-x-auto
         "
       >
+        <button
+          onClick={() => handleScroll('left')}
+          className="size-14 bg-primary rounded-full flex justify-center items-center sticky my-auto left-0 -ml-14"
+        >
+          <MdOutlineChevronLeft size={32} />
+        </button>
+
         {cards.map((card, index) => (
           <li
             key={`${card.title}-${index}`}
@@ -55,6 +94,13 @@ export function Section({
             <Card {...card} />
           </li>
         ))}
+
+        <button
+          onClick={() => handleScroll('right')}
+          className="size-14 bg-primary rounded-full flex justify-center items-center sticky my-auto right-0 -ml-14"
+        >
+          <MdOutlineChevronRight size={32} />
+        </button>
       </ul>
     </section>
   )
