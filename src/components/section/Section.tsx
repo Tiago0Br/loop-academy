@@ -19,21 +19,21 @@ const defaultCards: ICardProps[] = [
     description: 'Descrição do curso',
   },
   {
-    href: '/cursos/123',
+    href: '/cursos/124',
     image: 'https://i.ytimg.com/vi/bP47qRVRqQs/hqdefault.jpg',
     title:
       'Curso API Rest com Node e Typescript, Curso API Rest com Node e Typescript, Curso API Rest com Node e Typescript, Curso API Rest com Node e Typescript.',
     description: 'Descrição do curso',
   },
   {
-    href: '/cursos/123',
+    href: '/cursos/125',
     image: 'https://i.ytimg.com/vi/bP47qRVRqQs/hqdefault.jpg',
     title:
       'Curso API Rest com Node e Typescript, Curso API Rest com Node e Typescript, Curso API Rest com Node e Typescript, Curso API Rest com Node e Typescript.',
     description: 'Descrição do curso',
   },
   {
-    href: '/cursos/123',
+    href: '/cursos/126',
     image: 'https://i.ytimg.com/vi/bP47qRVRqQs/hqdefault.jpg',
     title:
       'Curso API Rest com Node e Typescript, Curso API Rest com Node e Typescript, Curso API Rest com Node e Typescript, Curso API Rest com Node e Typescript.',
@@ -78,12 +78,14 @@ export function Section({
           data-[variant=h-list]:sm:grid-flow-col data-[variant=h-list]:sm:overflow-x-auto
         "
       >
-        <button
-          onClick={() => handleScroll('left')}
-          className="size-14 bg-primary rounded-full flex justify-center items-center sticky my-auto left-0 -ml-14"
-        >
-          <MdOutlineChevronLeft size={32} />
-        </button>
+        {variant === 'h-list' && (
+          <button
+            onClick={() => handleScroll('left')}
+            className="size-14 bg-primary rounded-full flex justify-center items-center sticky my-auto left-0 -ml-14"
+          >
+            <MdOutlineChevronLeft size={32} />
+          </button>
+        )}
 
         {cards.map((card, index) => (
           <li
@@ -95,12 +97,14 @@ export function Section({
           </li>
         ))}
 
-        <button
-          onClick={() => handleScroll('right')}
-          className="size-14 bg-primary rounded-full flex justify-center items-center sticky my-auto right-0 -ml-14"
-        >
-          <MdOutlineChevronRight size={32} />
-        </button>
+        {variant === 'h-list' && (
+          <button
+            onClick={() => handleScroll('right')}
+            className="size-14 bg-primary rounded-full flex justify-center items-center sticky my-auto right-0 -mr-14"
+          >
+            <MdOutlineChevronRight size={32} />
+          </button>
+        )}
       </ul>
     </section>
   )
