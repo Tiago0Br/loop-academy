@@ -21,7 +21,10 @@ export function StartCourse({
 
   return (
     <>
-      <div ref={ref} className="p-3 bg-paper rounded-md flex flex-col gap-4">
+      <div
+        ref={ref}
+        className="p-3 bg-paper rounded-md flex flex-col gap-4 md:sticky md:top-[104px]"
+      >
         <Link
           href={`/cursos/${courseId}/aulas/${classId}`}
           style={{
@@ -35,18 +38,18 @@ export function StartCourse({
         </Link>
         <Link
           href={`/cursos/${courseId}/aulas/${classId}`}
-          className="bg-primary py-2 px-3 rounded text-center"
+          className="bg-primary py-2 px-3 rounded text-center hover:no-underline"
         >
           Começar curso
         </Link>
       </div>
 
       {!inView && (
-        <div className="py-3 px-2 bg-paper flex flex-col gap-4 absolute left-0 right-0 top-14">
+        <div className="py-3 px-2 bg-paper flex flex-col gap-4 absolute left-0 right-0 top-14 md:hidden">
           <h1 className="font-extrabold text-xl">{title}</h1>
           <Link
             href={`/cursos/${courseId}/aulas/${classId}`}
-            className="bg-primary py-2 px-3 rounded text-center"
+            className="bg-primary py-2 px-3 rounded text-center hover:no-underline"
           >
             Começar curso
           </Link>
