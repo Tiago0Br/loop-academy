@@ -1,5 +1,6 @@
-import { CourseHeader } from '@/components/course-header/CourseHeader'
 import { Metadata } from 'next'
+import { StartCourse } from '@/components/start-course/StartCourse'
+import { CourseHeader } from '@/components/course-header/CourseHeader'
 
 interface CourseDetailsProps {
   params: {
@@ -21,7 +22,13 @@ export default function CourseDetailsPage({
 }: CourseDetailsProps) {
   return (
     <main className="mt-8 flex justify-center">
-      <div className="w-full min-[920px]:max-w-[920px]">
+      <div className="w-full min-[920px]:max-w-[920px] px-2 flex flex-col gap-4">
+        <StartCourse
+          title="Curso de Figma para devs"
+          courseId={id}
+          classId="1"
+          imageUrl="https://i.ytimg.com/vi/bP47qRVRqQs/hqdefault.jpg"
+        />
         <CourseHeader />
       </div>
     </main>

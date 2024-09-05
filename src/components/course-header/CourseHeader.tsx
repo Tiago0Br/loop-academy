@@ -1,5 +1,3 @@
-'use client'
-
 import { MdShare } from 'react-icons/md'
 import { CollapsibleText } from './CollapsibleText'
 import { CopyContent } from './CopyContent'
@@ -17,7 +15,7 @@ export function CourseHeader() {
       <div className="flex items-center gap-2">
         <CopyContent
           title="Copie o conteúdo abaixo"
-          content={window.location.href}
+          content="https://localhost:3333/cursos/123"
         >
           <button className="py-2 px-4 bg-paper rounded-full flex gap-2 items-center">
             <MdShare />

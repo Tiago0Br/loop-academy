@@ -81,7 +81,7 @@ export function Section({
         {variant === 'h-list' && (
           <button
             onClick={() => handleScroll('left')}
-            className="size-14 bg-primary rounded-full flex justify-center items-center sticky my-auto left-0 -ml-14"
+            className="hidden sm:flex size-14 bg-primary rounded-full justify-center items-center sticky my-auto left-0 -ml-14"
           >
             <MdOutlineChevronLeft size={32} />
           </button>
@@ -100,7 +100,7 @@ export function Section({
         {variant === 'h-list' && (
           <button
             onClick={() => handleScroll('right')}
-            className="size-14 bg-primary rounded-full flex justify-center items-center sticky my-auto right-0 -mr-14"
+            className="hidden sm:flex size-14 bg-primary rounded-full justify-center items-center sticky my-auto right-0 -mr-14"
           >
             <MdOutlineChevronRight size={32} />
           </button>
