@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import { StartCourse } from '@/components/start-course/StartCourse'
 import { CourseHeader } from '@/components/course-header/CourseHeader'
+import { ClassGroup } from '@/components/course-content/ClassGroup'
 
 interface CourseDetailsProps {
   params: {
@@ -31,8 +32,25 @@ export default function CourseDetailsPage({
             imageUrl="https://i.ytimg.com/vi/bP47qRVRqQs/hqdefault.jpg"
           />
         </div>
-        <div className="flex-[2]">
+        <div className="flex-[2] flex flex-col gap-4">
           <CourseHeader />
+
+          <ClassGroup
+            title="NextJS com TailwindCSS e Typescript"
+            courseId="123"
+            classes={[
+              {
+                id: '1',
+                title:
+                  'NextJS, TailwindCSS e Typescript: #27 - Criando componente de Grupo de aula',
+              },
+              {
+                id: '2',
+                title:
+                  'NextJS, TailwindCSS e Typescript: #28 - Apresentação do protótipo',
+              },
+            ]}
+          />
         </div>
       </div>
     </main>
