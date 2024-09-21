@@ -1,21 +1,31 @@
+'use client'
+
 import { MdShare } from 'react-icons/md'
 import { CollapsibleText } from './CollapsibleText'
 import { CopyContent } from './CopyContent'
 
-export function CourseHeader() {
+interface ICourseHeaderProps {
+  title: string
+  description: string
+  numberOfClasses: number
+}
+
+export function CourseHeader({
+  title,
+  description,
+  numberOfClasses,
+}: ICourseHeaderProps) {
   return (
     <div className="flex flex-col gap-2">
-      <h1 className="font-extrabold text-xl">Curso de Figma para devs</h1>
+      <h1 className="font-extrabold text-xl">{title}</h1>
       <CollapsibleText numberOfLinesWhenClosed={1}>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta illo ad
-        ex. Veritatis delectus dicta sed quaerat ipsum ducimus vero aut libero
-        nobis. Vitae, dolore magni excepturi voluptatibus recusandae facere?
+        {description}
       </CollapsibleText>
 
       <div className="flex items-center gap-2">
         <CopyContent
           title="Copie o conteúdo abaixo"
-          content="https://localhost:3333/cursos/123"
+          content={window.location.href}
         >
           <button className="py-2 px-4 bg-paper rounded-full flex gap-2 items-center">
             <MdShare />
@@ -23,7 +33,7 @@ export function CourseHeader() {
           </button>
         </CopyContent>
 
-        <span>48 aulas</span>
+        <span>{numberOfClasses} aulas</span>
       </div>
     </div>
   )

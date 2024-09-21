@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { StartCourse } from '@/components/start-course/StartCourse'
 import { CourseHeader } from '@/components/course-header/CourseHeader'
-import { ClassGroup } from '@/components/course-content/ClassGroup'
+import { CourseContent } from '@/components/course-content/CourseContent'
 
 interface CourseDetailsProps {
   params: {
@@ -32,22 +32,50 @@ export default function CourseDetailsPage({
             imageUrl="https://i.ytimg.com/vi/bP47qRVRqQs/hqdefault.jpg"
           />
         </div>
-        <div className="flex-[2] flex flex-col gap-4">
-          <CourseHeader />
+        <div className="flex-[2] flex flex-col gap-14 pb-12">
+          <CourseHeader
+            title="Figma para devs"
+            description="
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta illo ad
+              ex. Veritatis delectus dicta sed quaerat ipsum ducimus vero aut libero
+              nobis. Vitae, dolore magni excepturi voluptatibus recusandae facere?
+            "
+            numberOfClasses={48}
+          />
 
-          <ClassGroup
-            title="NextJS com TailwindCSS e Typescript"
-            courseId="123"
-            classes={[
+          <CourseContent
+            classGroups={[
               {
-                id: '1',
-                title:
-                  'NextJS, TailwindCSS e Typescript: #27 - Criando componente de Grupo de aula',
+                title: 'NextJS com TailwindCSS e Typescript',
+                courseId: '123',
+                classes: [
+                  {
+                    id: '1',
+                    title:
+                      'NextJS, TailwindCSS e Typescript: #27 - Criando componente de Grupo de aula',
+                  },
+                  {
+                    id: '2',
+                    title:
+                      'NextJS, TailwindCSS e Typescript: #28 - Apresentação do protótipo',
+                  },
+                  {
+                    id: '3',
+                    title:
+                      'NextJS, TailwindCSS e Typescript: #29 - Finalizando o projeto!',
+                  },
+                ],
               },
               {
-                id: '2',
-                title:
-                  'NextJS, TailwindCSS e Typescript: #28 - Apresentação do protótipo',
+                title: 'Estilizando o projeto com TailwindCSS',
+                courseId: '123',
+                classes: [
+                  {
+                    id: '1',
+                    title:
+                      'NextJS, TailwindCSS e Typescript: #27 - Criando componente de Grupo de aula',
+                  },
+                ],
               },
             ]}
           />
