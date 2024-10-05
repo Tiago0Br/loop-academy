@@ -1,7 +1,5 @@
 import type { Metadata } from 'next'
 import { Nunito } from 'next/font/google'
-
-import { Header } from '@/components/header/Header'
 import './globals.css'
 
 interface IRootLayout extends Readonly<{ children: React.ReactNode }> {}
@@ -16,10 +14,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: IRootLayout) {
   return (
     <html lang="pt-BR">
-      <body className={nunito.className}>
-        <Header />
-        {children}
-      </body>
+      <body className={nunito.className}>{children}</body>
     </html>
   )
 }
