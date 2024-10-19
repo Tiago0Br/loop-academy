@@ -26,7 +26,7 @@ export function StartCourse({
         className="p-3 bg-paper rounded-md flex flex-col gap-4 md:sticky md:top-[104px]"
       >
         <Link
-          href={`/cursos/${courseId}/aulas/${classId}`}
+          href={`/player/${courseId}/${classId}`}
           style={{
             backgroundImage: `url(${imageUrl})`,
           }}
@@ -37,7 +37,7 @@ export function StartCourse({
           </div>
         </Link>
         <Link
-          href={`/cursos/${courseId}/aulas/${classId}`}
+          href={`/player/${courseId}/${classId}`}
           className="bg-primary py-2 px-3 rounded text-center hover:no-underline"
         >
           Começar curso
@@ -48,7 +48,7 @@ export function StartCourse({
         <div className="py-3 px-2 bg-paper flex flex-col gap-4 absolute left-0 right-0 top-14 md:hidden">
           <h1 className="font-extrabold text-xl">{title}</h1>
           <Link
-            href={`/cursos/${courseId}/aulas/${classId}`}
+            href={`/player/${courseId}/${classId}`}
             className="bg-primary py-2 px-3 rounded text-center hover:no-underline"
           >
             Começar curso
