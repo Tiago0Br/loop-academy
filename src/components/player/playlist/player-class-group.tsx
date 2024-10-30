@@ -3,21 +3,27 @@
 import { MdKeyboardArrowDown, MdKeyboardArrowRight } from 'react-icons/md'
 import { IPlayerClassProps, PlayerClass } from './player-class'
 
-interface IPlayerGroupClassProps {
+export interface IPlayerClassGroupProps {
   title: string
   position: number
-  classes: Omit<IPlayerClassProps, 'onPlay' | 'onCheck'>[]
+  classes: (Pick<IPlayerClassProps, 'done' | 'title'> & { classId: string })[]
   open?: boolean
   onToggle: () => void
+  playingClassId: string
+  onPlay: (classId: string) => void
+  onCheck: (classId: string) => void
 }
 
-export function PlayerGroupClass({
+export function PlayerClassGroup({
   title,
   position,
   classes,
   open,
+  playingClassId,
   onToggle,
-}: IPlayerGroupClassProps) {
+  onPlay,
+  onCheck,
+}: IPlayerClassGroupProps) {
   function getFinishedClasses() {
     return classes.filter(({ done }) => done)
   }
@@ -25,7 +31,7 @@ export function PlayerGroupClass({
   return (
     <div className="flex flex-col">
       <button
-        className="flex gap-2 p-4 bg-paper items-center"
+        className="flex gap-2 p-4 bg-paper items-center active:opacity-80"
         onClick={onToggle}
       >
         <div className="bg-background size-12 flex items-center justify-center rounded-full">
@@ -47,14 +53,13 @@ export function PlayerGroupClass({
       </button>
 
       <ol data-open={open} className="flex flex-col data-[open=false]:hidden">
-        {classes.map(({ title: classTitle, done, playing }) => (
-          <li key={classTitle}>
+        {classes.map((classItem) => (
+          <li key={classItem.classId}>
             <PlayerClass
-              title={classTitle}
-              done={done}
-              playing={playing}
-              onPlay={() => {}}
-              onCheck={() => {}}
+              {...classItem}
+              playing={classItem.classId === playingClassId}
+              onPlay={() => onPlay(classItem.classId)}
+              onCheck={() => onCheck(classItem.classId)}
             />
           </li>
         ))}
