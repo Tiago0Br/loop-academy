@@ -16,15 +16,19 @@ export function PlayerPlaylist({
   playingClassId,
 }: IPlayerPlaylistProps) {
   const router = useRouter()
-  const [openedIndex, setOpenedIndex] = useState<number | null>(null)
+  const [openedIndex, setOpenedIndex] = useState<number | null>(
+    classGroups.findIndex(({ classes }) =>
+      classes.some(({ classId }) => classId === playingClassId)
+    )
+  )
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 h-full">
       <div className="flex flex-col p-4 bg-paper">
         <h3 className="text-lg font-bold">Conteúdo do curso</h3>
       </div>
 
-      <ol>
+      <ol className="overflow-auto overflow-primary">
         {classGroups.map((classGroup, index) => (
           <li key={classGroup.title}>
             <PlayerClassGroup

@@ -12,13 +12,13 @@ export default function PlayerPage({
   params: { courseId, classId },
 }: PlayerProps) {
   return (
-    <main className="flex flex-col gap-10">
+    <main className="flex flex-col gap-2 h-screen">
       <PlayerHeader
         title="API Rest, Node e Typescript: #01 - Apresentação do curso"
         subTitle="API Rest, Node e Typescript"
       />
 
-      <div className="flex gap-2">
+      <div className="flex gap-2 h-[calc(100vh-64px-8px)]">
         <div className="max-w-96">
           <PlayerPlaylist
             courseId={courseId}
