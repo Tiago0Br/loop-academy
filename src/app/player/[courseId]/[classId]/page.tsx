@@ -1,5 +1,4 @@
-import { PlayerHeader } from '@/components/player/player-header'
-import { PlayerPlaylist } from '@/components/player/playlist/player-playlist'
+import { PlayerHeader, PlayerPlaylist, VideoPlayer } from '@/components/player'
 
 interface PlayerProps {
   params: {
@@ -54,7 +53,11 @@ export default function PlayerPage({
           />
         </div>
 
-        <div className="flex-1">Player</div>
+        <div className="flex-1">
+          <div className="aspect-video">
+            <VideoPlayer videoId="apXQAnFX3JM" />
+          </div>
+        </div>
       </div>
     </main>
   )
