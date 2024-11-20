@@ -1,4 +1,4 @@
-import { PlayerHeader, PlayerPlaylist, VideoPlayer } from '@/components/player'
+import { ClassDetails, PlayerHeader, PlayerPlaylist } from '@/components/player'
 
 interface PlayerProps {
   params: {
@@ -6,6 +6,32 @@ interface PlayerProps {
     classId: string
   }
 }
+
+const classGroups = [
+  {
+    title: 'Introdução e apresentação do projeto',
+    classes: [
+      {
+        title: 'API Rest, Node e Typescript: #01 - Apresentação do curso',
+        done: true,
+        classId: '12',
+      },
+      {
+        title: 'API Rest, Node e Typescript: #02 - Primeiro componente',
+        classId: '123',
+      },
+    ],
+  },
+  {
+    title: 'Primeiro componente',
+    classes: [
+      {
+        title: 'API Rest, Node e Typescript: #04 - Estilização com Tailwind',
+        classId: '1234',
+      },
+    ],
+  },
+]
 
 export default function PlayerPage({
   params: { courseId, classId },
@@ -22,42 +48,15 @@ export default function PlayerPage({
           <PlayerPlaylist
             courseId={courseId}
             playingClassId={classId}
-            classGroups={[
-              {
-                title: 'Introdução e apresentação do projeto',
-                classes: [
-                  {
-                    title:
-                      'API Rest, Node e Typescript: #01 - Apresentação do curso',
-                    done: true,
-                    classId: '12',
-                  },
-                  {
-                    title:
-                      'API Rest, Node e Typescript: #02 - Primeiro componente',
-                    classId: '123',
-                  },
-                ],
-              },
-              {
-                title: 'Primeiro componente',
-                classes: [
-                  {
-                    title:
-                      'API Rest, Node e Typescript: #04 - Estilização com Tailwind',
-                    classId: '1234',
-                  },
-                ],
-              },
-            ]}
+            classGroups={classGroups}
           />
         </div>
 
-        <div className="flex-1">
-          <div className="aspect-video">
-            <VideoPlayer videoId="apXQAnFX3JM" />
-          </div>
-        </div>
+        <ClassDetails
+          courseId={courseId}
+          classId={classId}
+          classGroups={classGroups}
+        />
       </div>
     </main>
   )

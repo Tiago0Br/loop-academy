@@ -3,7 +3,6 @@
 import dynamic from 'next/dynamic'
 import { useMemo, useRef, useState } from 'react'
 import { MdPlayCircle } from 'react-icons/md'
-import type TReactPlayer from 'react-player'
 
 const ReactPlayer = dynamic(() => import('react-player'), { ssr: false })
 
