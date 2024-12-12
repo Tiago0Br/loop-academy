@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import { VideoPlayer } from './video-player'
 import { IPlayerClassGroupProps } from '../playlist/player-class-group'
 import { useMemo } from 'react'
+import * as Tabs from '@radix-ui/react-tabs'
 
 interface IClassDetailsProps {
   classId: string
@@ -42,6 +43,33 @@ export function ClassDetails({
           }
         />
       </div>
+
+      <Tabs.Root defaultValue="class-details">
+        <Tabs.List className="flex gap-4 border-b border-paper">
+          <Tabs.Trigger
+            value="class-details"
+            className="p-2 flex items-center justify-center border-b-4 border-transparent data-[state=active]:border-primary"
+          >
+            Visão geral da aula
+          </Tabs.Trigger>
+          <Tabs.Trigger
+            value="class-comments"
+            className="p-2 flex items-center justify-center border-b-4 border-transparent data-[state=active]:border-primary"
+          >
+            Comentários
+          </Tabs.Trigger>
+          <Tabs.Trigger
+            value="course-details"
+            className="p-2 flex items-center justify-center border-b-4 border-transparent data-[state=active]:border-primary"
+          >
+            Visão geral do curso
+          </Tabs.Trigger>
+        </Tabs.List>
+
+        <Tabs.Content value="class-details">Detalhes da aula</Tabs.Content>
+        <Tabs.Content value="class-comments">Comentários da aula</Tabs.Content>
+        <Tabs.Content value="course-details">Detalhes do curso</Tabs.Content>
+      </Tabs.Root>
     </div>
   )
 }
