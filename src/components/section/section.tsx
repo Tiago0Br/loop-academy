@@ -2,7 +2,7 @@
 
 import { MdOutlineChevronLeft, MdOutlineChevronRight } from 'react-icons/md'
 import { useRef } from 'react'
-import { Card, ICardProps } from '@/components/card/Card'
+import { Card, ICardProps } from '@/components/card/card'
 
 interface ISectionProps {
   title: string

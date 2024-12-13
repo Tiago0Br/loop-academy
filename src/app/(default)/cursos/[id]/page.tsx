@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
-import { StartCourse } from '@/components/start-course/StartCourse'
-import { CourseHeader } from '@/components/course-header/CourseHeader'
-import { CourseContent } from '@/components/course-content/CourseContent'
+import { StartCourse } from '@/components/start-course/start-course'
+import { CourseHeader } from '@/components/course-header/course-header'
+import { CourseContent } from '@/components/course-content/course-content'
 
 interface CourseDetailsProps {
   params: {

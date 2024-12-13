@@ -1,8 +1,8 @@
 'use client'
 
 import { MdShare } from 'react-icons/md'
-import { CollapsibleText } from './CollapsibleText'
-import { CopyContent } from './CopyContent'
+import { CollapsibleText } from './collapsible-text'
+import { CopyContent } from './copy-content'
 
 interface ICourseHeaderProps {
   title: string

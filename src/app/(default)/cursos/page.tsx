@@ -1,4 +1,4 @@
-import { Section } from '@/components/section/Section'
+import { Section } from '@/components/section/section'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {

@@ -1,5 +1,5 @@
-import { KeepWatching } from '@/components/keep-watching'
-import { Section } from '@/components/section/Section'
+import { KeepWatching } from '@/components/keep-watching/keep-watching'
+import { Section } from '@/components/section/section'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {

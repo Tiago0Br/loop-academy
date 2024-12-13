@@ -1,7 +1,7 @@
 'use client'
 
 import { MdKeyboardArrowDown, MdKeyboardArrowRight } from 'react-icons/md'
-import { Class } from './Class'
+import { Class } from './class'
 import { useState } from 'react'
 
 export interface IClassGroupProps {
