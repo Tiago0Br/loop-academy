@@ -5,14 +5,27 @@ import { VideoPlayer } from './video-player'
 import { IPlayerClassGroupProps } from '../playlist/player-class-group'
 import { useMemo } from 'react'
 import * as Tabs from '@radix-ui/react-tabs'
+import { CourseHeader } from '@/components/course-header/course-header'
+import { ClassHeader } from './class-header'
 
 interface IClassDetailsProps {
+  course: {
+    title: string
+    description: string
+    numberOfClasses: number
+  }
+  classItem: {
+    title: string
+    description: string
+  }
   classId: string
   courseId: string
   classGroups: Pick<IPlayerClassGroupProps, 'classes' | 'title'>[]
 }
 
 export function ClassDetails({
+  course,
+  classItem,
   classId,
   courseId,
   classGroups,
@@ -34,7 +47,7 @@ export function ClassDetails({
   }, [classGroups, classId])
 
   return (
-    <div className="flex-1">
+    <div className="flex-1 overflow-auto pb-10">
       <div className="aspect-video">
         <VideoPlayer
           videoId="apXQAnFX3JM"
@@ -45,7 +58,7 @@ export function ClassDetails({
       </div>
 
       <Tabs.Root defaultValue="class-details">
-        <Tabs.List className="flex gap-4 border-b border-paper">
+        <Tabs.List className="flex gap-4 border-b border-paper mb-2">
           <Tabs.Trigger
             value="class-details"
             className="p-2 flex items-center justify-center border-b-4 border-transparent data-[state=active]:border-primary"
@@ -66,9 +79,20 @@ export function ClassDetails({
           </Tabs.Trigger>
         </Tabs.List>
 
-        <Tabs.Content value="class-details">Detalhes da aula</Tabs.Content>
+        <Tabs.Content value="class-details">
+          <ClassHeader
+            title={classItem.title}
+            description={classItem.description}
+          />
+        </Tabs.Content>
         <Tabs.Content value="class-comments">Comentários da aula</Tabs.Content>
-        <Tabs.Content value="course-details">Detalhes do curso</Tabs.Content>
+        <Tabs.Content value="course-details">
+          <CourseHeader
+            description={course.description}
+            title={course.title}
+            numberOfClasses={course.numberOfClasses}
+          />
+        </Tabs.Content>
       </Tabs.Root>
     </div>
   )
