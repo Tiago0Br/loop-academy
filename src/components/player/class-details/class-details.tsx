@@ -1,11 +1,11 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { VideoPlayer } from './video-player'
-import { IPlayerClassGroupProps } from '../playlist/player-class-group'
-import { useMemo } from 'react'
+import { useMemo, useRef } from 'react'
 import * as Tabs from '@radix-ui/react-tabs'
+import { IPlayerClassGroupProps } from '../playlist/player-class-group'
 import { CourseHeader } from '@/components/course-header/course-header'
+import { VideoPlayer, IVideoPlayerRef } from './video-player'
 import { ClassHeader } from './class-header'
 
 interface IClassDetailsProps {
@@ -46,10 +46,13 @@ export function ClassDetails({
     return classes[nextClassIndex].classId
   }, [classGroups, classId])
 
+  const videoPlayerRef = useRef<IVideoPlayerRef>(null)
+
   return (
     <div className="flex-1 overflow-auto pb-10">
       <div className="aspect-video">
         <VideoPlayer
+          ref={videoPlayerRef}
           videoId="apXQAnFX3JM"
           onPlayNext={() =>
             nextClassId ? router.push(`/player/${courseId}/${nextClassId}`) : {}
@@ -83,6 +86,9 @@ export function ClassDetails({
           <ClassHeader
             title={classItem.title}
             description={classItem.description}
+            onTimeClick={(seconds) =>
+              videoPlayerRef.current?.setProgress(seconds)
+            }
           />
         </Tabs.Content>
         <Tabs.Content value="class-comments">Comentários da aula</Tabs.Content>
