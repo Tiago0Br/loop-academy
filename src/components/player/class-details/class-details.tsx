@@ -7,6 +7,7 @@ import { IPlayerClassGroupProps } from '../playlist/player-class-group'
 import { CourseHeader } from '@/components/course-header/course-header'
 import { VideoPlayer, IVideoPlayerRef } from './video-player'
 import { ClassHeader } from './class-header'
+import { Comments } from './comments/comments'
 
 interface IClassDetailsProps {
   course: {
@@ -53,7 +54,7 @@ export function ClassDetails({
       <div className="aspect-video">
         <VideoPlayer
           ref={videoPlayerRef}
-          videoId="apXQAnFX3JM"
+          videoId="apXQA_nFX3JM"
           onPlayNext={() =>
             nextClassId ? router.push(`/player/${courseId}/${nextClassId}`) : {}
           }
@@ -82,7 +83,7 @@ export function ClassDetails({
           </Tabs.Trigger>
         </Tabs.List>
 
-        <Tabs.Content value="class-details">
+        <Tabs.Content className="px-2" value="class-details">
           <ClassHeader
             title={classItem.title}
             description={classItem.description}
@@ -91,8 +92,10 @@ export function ClassDetails({
             }
           />
         </Tabs.Content>
-        <Tabs.Content value="class-comments">Comentários da aula</Tabs.Content>
-        <Tabs.Content value="course-details">
+        <Tabs.Content className="px-2" value="class-comments">
+          <Comments />
+        </Tabs.Content>
+        <Tabs.Content className="px-2" value="course-details">
           <CourseHeader
             description={course.description}
             title={course.title}
