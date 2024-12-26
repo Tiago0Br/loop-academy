@@ -33,7 +33,7 @@ export function ClassGroup({ title, courseId, classes }: IClassGroupProps) {
           <Class
             key={id}
             title={title}
-            playerUrl={`/cursos/${courseId}/aulas/${id}`}
+            playerUrl={`/player/${courseId}/${id}`}
           />
         ))}
       </ol>

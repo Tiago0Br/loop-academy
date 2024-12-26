@@ -7,45 +7,10 @@ import { Card, ICardProps } from '@/components/card/card'
 interface ISectionProps {
   title: string
   variant?: 'grid' | 'h-list'
-  cards?: ICardProps[]
+  items: ICardProps[]
 }
 
-const defaultCards: ICardProps[] = [
-  {
-    href: '/cursos/123',
-    image: 'https://i.ytimg.com/vi/bP47qRVRqQs/hqdefault.jpg',
-    title:
-      'Curso API Rest com Node e Typescript, Curso API Rest com Node e Typescript, Curso API Rest com Node e Typescript, Curso API Rest com Node e Typescript.',
-    description: 'Descrição do curso',
-  },
-  {
-    href: '/cursos/124',
-    image: 'https://i.ytimg.com/vi/bP47qRVRqQs/hqdefault.jpg',
-    title:
-      'Curso API Rest com Node e Typescript, Curso API Rest com Node e Typescript, Curso API Rest com Node e Typescript, Curso API Rest com Node e Typescript.',
-    description: 'Descrição do curso',
-  },
-  {
-    href: '/cursos/125',
-    image: 'https://i.ytimg.com/vi/bP47qRVRqQs/hqdefault.jpg',
-    title:
-      'Curso API Rest com Node e Typescript, Curso API Rest com Node e Typescript, Curso API Rest com Node e Typescript, Curso API Rest com Node e Typescript.',
-    description: 'Descrição do curso',
-  },
-  {
-    href: '/cursos/126',
-    image: 'https://i.ytimg.com/vi/bP47qRVRqQs/hqdefault.jpg',
-    title:
-      'Curso API Rest com Node e Typescript, Curso API Rest com Node e Typescript, Curso API Rest com Node e Typescript, Curso API Rest com Node e Typescript.',
-    description: 'Descrição do curso',
-  },
-]
-
-export function Section({
-  title,
-  variant = 'grid',
-  cards = defaultCards,
-}: ISectionProps) {
+export function Section({ title, variant = 'grid', items }: ISectionProps) {
   const scrollRef = useRef<HTMLUListElement>(null)
 
   const handleScroll = (direction: 'left' | 'right') => {
@@ -87,13 +52,13 @@ export function Section({
           </button>
         )}
 
-        {cards.map((card, index) => (
+        {items.map((course, index) => (
           <li
-            key={`${card.title}-${index}`}
+            key={`${course.title}-${index}`}
             data-variant={variant}
             className="w-full data-[variant=h-list]:sm:w-72"
           >
-            <Card {...card} />
+            <Card {...course} />
           </li>
         ))}
 

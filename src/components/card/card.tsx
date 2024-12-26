@@ -2,21 +2,21 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 export interface ICardProps {
-  href: string
-  image: string
+  id: string
+  thumbnail: string
   title: string
   description: string
 }
 
-export function Card({ href, image, title, description }: ICardProps) {
+export function Card({ id, thumbnail, title, description }: ICardProps) {
   return (
-    <Link href={href} className="hover:no-underline">
+    <Link href={`/cursos/${id}`} className="hover:no-underline">
       <article className="flex flex-col gap-2 p-2 rounded sm:hover:bg-primary">
         <Image
           height={0}
           width={1000}
           className="aspect-video object-cover rounded sm:rounded-2xl md:rounded-[.5rem]"
-          src={image}
+          src={thumbnail}
           alt={`Logo do curso "${title}"`}
           draggable={false}
         />
