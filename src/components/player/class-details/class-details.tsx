@@ -1,13 +1,20 @@
 'use client'
 
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation'
 import { useMemo, useRef } from 'react'
 import * as Tabs from '@radix-ui/react-tabs'
 import { IPlayerClassGroupProps } from '../playlist/player-class-group'
-import { CourseHeader } from '@/components/course-header/course-header'
 import { VideoPlayer, IVideoPlayerRef } from './video-player'
 import { ClassHeader } from './class-header'
 import { Comments } from './comments/comments'
+
+const CourseHeader = dynamic(
+  import('@/components/course-header/course-header').then(
+    (res) => res.CourseHeader
+  ),
+  { ssr: false }
+)
 
 interface IClassDetailsProps {
   course: {

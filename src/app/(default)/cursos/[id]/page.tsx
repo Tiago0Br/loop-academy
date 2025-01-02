@@ -1,13 +1,30 @@
 import { Metadata } from 'next'
 import { StartCourse } from '@/components/start-course/start-course'
-import { CourseHeader } from '@/components/course-header/course-header'
 import { CourseContent } from '@/components/course-content/course-content'
 import { APIYoutube } from '@/shared/services/api-youtube'
+import dynamic from 'next/dynamic'
+
+const CourseHeader = dynamic(
+  import('@/components/course-header/course-header').then(
+    (res) => res.CourseHeader
+  ),
+  { ssr: false }
+)
 
 interface CourseDetailsProps {
   params: {
     id: string
   }
+}
+
+export async function generateStaticParams(): Promise<
+  CourseDetailsProps['params'][]
+> {
+  const courses = await APIYoutube.course.getAll()
+
+  return courses.map((course) => ({
+    id: course.id,
+  }))
 }
 
 export async function generateMetadata({
