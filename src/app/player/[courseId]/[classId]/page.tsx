@@ -44,7 +44,7 @@ export default function PlayerPage({
       />
 
       <div className="flex gap-2 h-[calc(100vh-64px-8px)]">
-        <div className="max-w-96">
+        <div className="hidden md:block max-w-96">
           <PlayerPlaylist
             courseId={courseId}
             playingClassId={classId}
@@ -54,14 +54,17 @@ export default function PlayerPage({
 
         <ClassDetails
           course={{
+            id: courseId,
             title: 'API Rest, Node e Typescript',
             description: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit temporibus 
               nobis quae cumque eum libero maxime, neque, hic voluptatem quasi, 
               ad inventore velit alias. Explicabo sunt expedita natus. Quis, eos!
               Textão textão textão`,
             numberOfClasses: 48,
+            classGroups,
           }}
           classItem={{
+            id: classId,
             title: 'API Rest, Node e Typescript: #01 - Apresentação do curso',
             description: `
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. <br>Odit temporibus
@@ -74,10 +77,11 @@ export default function PlayerPage({
               <br>16:00 | Estilização com Tailwind
               <br>20:00 | Segundo componente
             `,
+            videoId: 'tGbAfFRC9p0',
+            likesCount: 20,
+            commentsCount: 8,
+            viewsCount: 100,
           }}
-          courseId={courseId}
-          classId={classId}
-          classGroups={classGroups}
         />
       </div>
     </main>
