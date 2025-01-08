@@ -8,6 +8,7 @@ import { IPlayerClassGroupProps } from '../playlist/player-class-group'
 import { VideoPlayer, IVideoPlayerRef } from './video-player'
 import { ClassHeader } from './class-header'
 import { Comments } from './comments/comments'
+import { ICommentProps } from './comments/comment'
 
 const CourseHeader = dynamic(
   import('@/components/course-header/course-header').then(
@@ -15,6 +16,38 @@ const CourseHeader = dynamic(
   ),
   { ssr: false }
 )
+
+const comments: ICommentProps[] = [
+  {
+    author: {
+      image: 'https://github.com/Tiago0Br.png',
+      name: 'Tiago Lopes',
+    },
+    content: 'Opa, essa aula é muito boa!',
+    likesCount: 2,
+    publishedAt: '2023-06-24T10:00:00.000Z',
+    replies: [
+      {
+        author: {
+          image: 'https://github.com/Tiago0Br.png',
+          name: 'Tiago Lopes',
+        },
+        content: 'Eu achei bem fraquinha.',
+        likesCount: 1,
+        publishedAt: '2023-12-24T10:00:00.000Z',
+      },
+    ],
+  },
+  {
+    author: {
+      image: 'https://github.com/Tiago0Br.png',
+      name: 'Tiago Lopes',
+    },
+    content: 'Top demais da conta!',
+    likesCount: 200,
+    publishedAt: '2024-12-24T10:00:00.000Z',
+  },
+]
 
 interface IClassDetailsProps {
   course: {
@@ -61,7 +94,7 @@ export function ClassDetails({
       <div className="aspect-video">
         <VideoPlayer
           ref={videoPlayerRef}
-          videoId="apXQA_nFX3JM"
+          videoId="tGbAfFRC9p0"
           onPlayNext={() =>
             nextClassId ? router.push(`/player/${courseId}/${nextClassId}`) : {}
           }
@@ -100,7 +133,7 @@ export function ClassDetails({
           />
         </Tabs.Content>
         <Tabs.Content className="px-2" value="class-comments">
-          <Comments />
+          <Comments comments={comments} />
         </Tabs.Content>
         <Tabs.Content className="px-2" value="course-details">
           <CourseHeader
