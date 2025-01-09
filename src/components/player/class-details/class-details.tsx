@@ -44,32 +44,34 @@ const comments: ICommentProps[] = [
   },
 ]
 
+export interface IClassItem {
+  id: string
+  title: string
+  description: string
+  videoId: string
+  likesCount: number
+  viewsCount: number
+  commentsCount: number
+}
+
+export interface ICourseItem {
+  id: string
+  title: string
+  description: string
+  numberOfClasses: number
+  classGroups: Pick<IPlayerClassGroupProps, 'classes' | 'title'>[]
+}
+
 interface IClassDetailsProps {
-  course: {
-    id: string
-    title: string
-    description: string
-    numberOfClasses: number
-    classGroups: Pick<IPlayerClassGroupProps, 'classes' | 'title'>[]
-  }
-  classItem: {
-    id: string
-    title: string
-    description: string
-    videoId: string
-    likesCount: number
-    viewsCount: number
-    commentsCount: number
-  }
+  course: ICourseItem
+  classItem: IClassItem
 }
 
 export function ClassDetails({ course, classItem }: IClassDetailsProps) {
   const router = useRouter()
   const nextClassId = useMemo(() => {
     const classes = course.classGroups.flatMap(({ classes }) => classes)
-    const currentClassIndex = classes.findIndex(
-      ({ classId }) => classId === classItem.id
-    )
+    const currentClassIndex = classes.findIndex(({ id }) => id === classItem.id)
 
     const nextClassIndex = currentClassIndex + 1
 
@@ -77,7 +79,7 @@ export function ClassDetails({ course, classItem }: IClassDetailsProps) {
       return undefined
     }
 
-    return classes[nextClassIndex].classId
+    return classes[nextClassIndex].id
   }, [classItem.id, course.classGroups])
 
   const videoPlayerRef = useRef<IVideoPlayerRef>(null)

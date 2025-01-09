@@ -18,7 +18,7 @@ export function PlayerPlaylist({
   const router = useRouter()
   const [openedIndex, setOpenedIndex] = useState<number | null>(
     classGroups.findIndex(({ classes }) =>
-      classes.some(({ classId }) => classId === playingClassId)
+      classes.some(({ id }) => id === playingClassId)
     )
   )
 

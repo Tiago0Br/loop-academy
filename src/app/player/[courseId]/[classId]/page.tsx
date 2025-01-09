@@ -1,4 +1,5 @@
 import { ClassDetails, PlayerHeader, PlayerPlaylist } from '@/components/player'
+import { APIYoutube } from '@/shared/services/api-youtube'
 
 interface PlayerProps {
   params: {
@@ -7,35 +8,12 @@ interface PlayerProps {
   }
 }
 
-const classGroups = [
-  {
-    title: 'Introdução e apresentação do projeto',
-    classes: [
-      {
-        title: 'API Rest, Node e Typescript: #01 - Apresentação do curso',
-        done: true,
-        classId: '12',
-      },
-      {
-        title: 'API Rest, Node e Typescript: #02 - Primeiro componente',
-        classId: '123',
-      },
-    ],
-  },
-  {
-    title: 'Primeiro componente',
-    classes: [
-      {
-        title: 'API Rest, Node e Typescript: #04 - Estilização com Tailwind',
-        classId: '1234',
-      },
-    ],
-  },
-]
-
-export default function PlayerPage({
+export default async function PlayerPage({
   params: { courseId, classId },
 }: PlayerProps) {
+  const courseDetails = await APIYoutube.course.getById(courseId)
+  const classDetails = await APIYoutube.class.getById(classId)
+
   return (
     <main className="flex flex-col gap-2 h-screen">
       <PlayerHeader
@@ -48,39 +26,26 @@ export default function PlayerPage({
           <PlayerPlaylist
             courseId={courseId}
             playingClassId={classId}
-            classGroups={classGroups}
+            classGroups={courseDetails.classGroups}
           />
         </div>
 
         <ClassDetails
           course={{
             id: courseId,
-            title: 'API Rest, Node e Typescript',
-            description: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odit temporibus 
-              nobis quae cumque eum libero maxime, neque, hic voluptatem quasi, 
-              ad inventore velit alias. Explicabo sunt expedita natus. Quis, eos!
-              Textão textão textão`,
-            numberOfClasses: 48,
-            classGroups,
+            title: courseDetails.title,
+            description: courseDetails.description,
+            numberOfClasses: courseDetails.numberOfClasses,
+            classGroups: courseDetails.classGroups,
           }}
           classItem={{
             id: classId,
-            title: 'API Rest, Node e Typescript: #01 - Apresentação do curso',
-            description: `
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. <br>Odit temporibus
-              nobis quae cumque eum libero maxime, neque, hic voluptatem quasi, 
-              ad inventore velit alias. <i>Explicabo</i> sunt expedita natus. Quis, eos!
-              <b>Textão textão textão</b>. Link: https://www.google.com/
-              <br><br><b>Conteúdo</b>
-              <br>00:00 | Introdução
-              <br>10:25 | Primeiro componente
-              <br>16:00 | Estilização com Tailwind
-              <br>20:00 | Segundo componente
-            `,
-            videoId: 'tGbAfFRC9p0',
-            likesCount: 20,
-            commentsCount: 8,
-            viewsCount: 100,
+            title: classDetails.title,
+            description: classDetails.description,
+            videoId: classDetails.videoId,
+            likesCount: classDetails.likesCount,
+            commentsCount: classDetails.commentsCount,
+            viewsCount: classDetails.viewsCount,
           }}
         />
       </div>

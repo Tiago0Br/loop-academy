@@ -1,3 +1,4 @@
+import { IClassItem } from '@/components/player'
 import { youtube, youtube_v3 } from '@googleapis/youtube'
 
 const fetchWithNextConfig =
@@ -138,6 +139,51 @@ export const APIYoutube = {
         thumbnail: courseItem.snippet?.thumbnails?.high?.url ?? '',
         classGroups,
         numberOfClasses: classes.length,
+      }
+    },
+  },
+  class: {
+    getById: async (id: string): Promise<IClassItem> => {
+      const {
+        data: { items: [classItem] = [] },
+      } = await YoutubeApiClient.playlistItems.list(
+        { id: [id], part: ['contentDetails'] },
+        {
+          fetchImplementation: fetchWithNextConfig({
+            revalidate: 60 * 60 * 24,
+          }),
+        }
+      )
+
+      const videoId = classItem.contentDetails?.videoId
+      if (!videoId) throw new Error('Video id not found')
+
+      const {
+        data: { items: [videoItem] = [] },
+      } = await YoutubeApiClient.videos.list(
+        {
+          id: [videoId],
+          maxResults: 1,
+          part: ['snippet', 'statistics'],
+        },
+        {
+          fetchImplementation: fetchWithNextConfig({
+            revalidate: 60 * 60 * 48,
+          }),
+        }
+      )
+
+      if (!videoItem.snippet) throw new Error('Snippet not found')
+      if (!videoItem.statistics) throw new Error('Statistics not found')
+
+      return {
+        id,
+        videoId,
+        title: String(videoItem.snippet.title),
+        description: String(videoItem.snippet.description),
+        viewsCount: Number(videoItem.statistics.viewCount),
+        likesCount: Number(videoItem.statistics.likeCount),
+        commentsCount: Number(videoItem.statistics.commentCount),
       }
     },
   },

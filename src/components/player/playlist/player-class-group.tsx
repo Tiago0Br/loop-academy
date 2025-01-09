@@ -6,7 +6,7 @@ import { IPlayerClassProps, PlayerClass } from './player-class'
 export interface IPlayerClassGroupProps {
   title: string
   position: number
-  classes: (Pick<IPlayerClassProps, 'done' | 'title'> & { classId: string })[]
+  classes: (Pick<IPlayerClassProps, 'done' | 'title'> & { id: string })[]
   open?: boolean
   onToggle: () => void
   playingClassId: string
@@ -54,12 +54,12 @@ export function PlayerClassGroup({
 
       <ol data-open={open} className="flex flex-col data-[open=false]:hidden">
         {classes.map((classItem) => (
-          <li key={classItem.classId}>
+          <li key={classItem.id}>
             <PlayerClass
               {...classItem}
-              playing={classItem.classId === playingClassId}
-              onPlay={() => onPlay(classItem.classId)}
-              onCheck={() => onCheck(classItem.classId)}
+              playing={classItem.id === playingClassId}
+              onPlay={() => onPlay(classItem.id)}
+              onCheck={() => onCheck(classItem.id)}
             />
           </li>
         ))}
