@@ -1,8 +1,16 @@
+import dynamic from 'next/dynamic'
 import { Metadata } from 'next'
 import { StartCourse } from '@/components/start-course/start-course'
 import { CourseContent } from '@/components/course-content/course-content'
 import { APIYoutube } from '@/shared/services/api-youtube'
-import { CourseHeader } from '@/components/course-header/course-header'
+
+const CourseHeader = dynamic(
+  () =>
+    import('@/components/course-header/course-header').then(
+      (mod) => mod.CourseHeader
+    ),
+  { ssr: false }
+)
 
 interface CourseDetailsProps {
   params: {

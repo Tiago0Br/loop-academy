@@ -186,5 +186,37 @@ export const APIYoutube = {
         commentsCount: Number(videoItem.statistics.commentCount),
       }
     },
+    getAllByCourseId: async (courseId: string) => {
+      const classes: youtube_v3.Schema$PlaylistItem[] = []
+      let nextPageToken: string | undefined
+
+      do {
+        YoutubeApiClient.playlistItems
+          .list(
+            {
+              playlistId: courseId,
+              part: ['snippet'],
+              maxResults: 50,
+              pageToken: nextPageToken,
+            },
+            {
+              fetchImplementation: fetchWithNextConfig({
+                revalidate: 60 * 60 * 24,
+              }),
+            }
+          )
+          .then(({ data }) => {
+            classes.push(...(data.items ?? []))
+            nextPageToken = data.nextPageToken ?? undefined
+          })
+      } while (nextPageToken)
+
+      return (
+        classes.map((classItem) => ({
+          courseId,
+          classId: classItem.id ?? '',
+        })) ?? []
+      )
+    },
   },
 }
