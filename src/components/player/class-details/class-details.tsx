@@ -1,16 +1,17 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import * as Tabs from '@radix-ui/react-tabs'
+import { MdThumbUp, MdVisibility } from 'react-icons/md'
+import { CourseHeader } from '@/components/course-header/course-header'
+import { LocalStorage } from '@/shared/services/local-storage'
 import { IPlayerClassGroupProps } from '../playlist/player-class-group'
 import { VideoPlayer, IVideoPlayerRef } from './video-player'
 import { ClassHeader } from './class-header'
 import { Comments } from './comments/comments'
 import { ICommentProps } from './comments/comment'
 import { PlayerPlaylist } from '../playlist/player-playlist'
-import { CourseHeader } from '@/components/course-header/course-header'
-import { MdThumbUp, MdVisibility } from 'react-icons/md'
 
 export interface IClassItem {
   id: string
@@ -71,6 +72,15 @@ export function ClassDetails({
 
     return () => matchMedia.removeEventListener('change', handleMatchMedia)
   }, [currentTab])
+
+  useEffect(() => {
+    LocalStorage.keepWatching.set({
+      courseId: course.id,
+      courseName: course.title,
+      classId: classItem.id,
+      className: classItem.title,
+    })
+  }, [course.id, course.title, classItem.id, classItem.title])
 
   return (
     <div className="flex-1 overflow-auto pb-10">
