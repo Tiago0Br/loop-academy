@@ -44,6 +44,9 @@ export default async function PlayerPage({
 }: PlayerProps) {
   const courseDetails = await APIYoutube.course.getById(courseId)
   const classDetails = await APIYoutube.class.getById(classId)
+  const comments = await APIYoutube.comments.getAllByVideoId(
+    classDetails.videoId
+  )
 
   return (
     <main className="flex flex-col gap-2 h-screen">
@@ -78,6 +81,7 @@ export default async function PlayerPage({
             commentsCount: classDetails.commentsCount,
             viewsCount: classDetails.viewsCount,
           }}
+          comments={comments}
         />
       </div>
     </main>

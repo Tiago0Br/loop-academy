@@ -1,4 +1,5 @@
 import { IClassItem } from '@/components/player'
+import { ICommentProps } from '@/components/player/class-details/comments/comment'
 import { youtube, youtube_v3 } from '@googleapis/youtube'
 
 const fetchWithNextConfig =
@@ -215,6 +216,48 @@ export const APIYoutube = {
         classes.map((classItem) => ({
           courseId,
           classId: classItem.id ?? '',
+        })) ?? []
+      )
+    },
+  },
+  comments: {
+    getAllByVideoId: async (videoId: string): Promise<ICommentProps[]> => {
+      const { data } = await YoutubeApiClient.commentThreads.list(
+        {
+          part: ['snippet', 'replies'],
+          videoId,
+          maxResults: 50,
+        },
+        {
+          fetchImplementation: fetchWithNextConfig({
+            revalidate: 60 * 60 * 24,
+          }),
+        }
+      )
+
+      return (
+        data.items?.map((item) => ({
+          likesCount: item.snippet?.topLevelComment?.snippet?.likeCount ?? 0,
+          content: item.snippet?.topLevelComment?.snippet?.textOriginal ?? '',
+          publishedAt:
+            item.snippet?.topLevelComment?.snippet?.publishedAt ?? '',
+          author: {
+            name:
+              item.snippet?.topLevelComment?.snippet?.authorDisplayName ?? '',
+            image:
+              item.snippet?.topLevelComment?.snippet?.authorProfileImageUrl ??
+              '',
+          },
+          replies:
+            item.replies?.comments?.map((reply) => ({
+              likesCount: reply.snippet?.likeCount ?? 0,
+              content: reply.snippet?.textOriginal ?? '',
+              publishedAt: reply.snippet?.publishedAt ?? '',
+              author: {
+                name: reply.snippet?.authorDisplayName ?? '',
+                image: reply.snippet?.authorProfileImageUrl ?? '',
+              },
+            })) ?? [],
         })) ?? []
       )
     },

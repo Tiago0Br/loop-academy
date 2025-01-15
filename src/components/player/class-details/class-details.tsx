@@ -12,38 +12,6 @@ import { PlayerPlaylist } from '../playlist/player-playlist'
 import { CourseHeader } from '@/components/course-header/course-header'
 import { MdThumbUp, MdVisibility } from 'react-icons/md'
 
-const comments: ICommentProps[] = [
-  {
-    author: {
-      image: 'https://github.com/Tiago0Br.png',
-      name: 'Tiago Lopes',
-    },
-    content: 'Opa, essa aula é muito boa!',
-    likesCount: 2,
-    publishedAt: '2023-06-24T10:00:00.000Z',
-    replies: [
-      {
-        author: {
-          image: 'https://github.com/Tiago0Br.png',
-          name: 'Tiago Lopes',
-        },
-        content: 'Eu achei bem fraquinha.',
-        likesCount: 1,
-        publishedAt: '2023-12-24T10:00:00.000Z',
-      },
-    ],
-  },
-  {
-    author: {
-      image: 'https://github.com/Tiago0Br.png',
-      name: 'Tiago Lopes',
-    },
-    content: 'Top demais da conta!',
-    likesCount: 200,
-    publishedAt: '2024-12-24T10:00:00.000Z',
-  },
-]
-
 export interface IClassItem {
   id: string
   title: string
@@ -65,9 +33,14 @@ export interface ICourseItem {
 interface IClassDetailsProps {
   course: ICourseItem
   classItem: IClassItem
+  comments: ICommentProps[]
 }
 
-export function ClassDetails({ course, classItem }: IClassDetailsProps) {
+export function ClassDetails({
+  course,
+  classItem,
+  comments = [],
+}: IClassDetailsProps) {
   const router = useRouter()
   const nextClassId = useMemo(() => {
     const classes = course.classGroups.flatMap(({ classes }) => classes)
