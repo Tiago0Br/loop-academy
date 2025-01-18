@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import * as Tabs from '@radix-ui/react-tabs'
 import { MdThumbUp, MdVisibility } from 'react-icons/md'
@@ -82,17 +82,20 @@ export function ClassDetails({
     })
   }, [course.id, course.title, classItem.id, classItem.title])
 
+  const handlePlayerNext = useCallback(() => {
+    if (!nextClassId) return
+
+    LocalStorage.watchedContent.toggle(course.id, classItem.id, 'add')
+    router.push(`/player/${course.id}/${nextClassId}`)
+  }, [nextClassId, course.id, classItem.id, router])
+
   return (
     <div className="flex-1 overflow-auto pb-10">
       <div className="aspect-video">
         <VideoPlayer
           ref={videoPlayerRef}
           videoId={classItem.videoId}
-          onPlayNext={() =>
-            nextClassId
-              ? router.push(`/player/${course.id}/${nextClassId}`)
-              : {}
-          }
+          onPlayNext={handlePlayerNext}
         />
       </div>
 

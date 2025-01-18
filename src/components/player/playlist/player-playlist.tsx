@@ -1,8 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { IPlayerClassGroupProps, PlayerClassGroup } from './player-class-group'
 import { useRouter } from 'next/navigation'
+import { LocalStorage } from '@/shared/services/local-storage'
 
 interface IPlayerPlaylistProps {
   courseId: string
@@ -16,10 +17,46 @@ export function PlayerPlaylist({
   playingClassId,
 }: IPlayerPlaylistProps) {
   const router = useRouter()
+
+  const [watchedContentId, setWatchedContentId] = useState<string[]>([])
   const [openedIndex, setOpenedIndex] = useState<number | null>(
     classGroups.findIndex(({ classes }) =>
       classes.some(({ id }) => id === playingClassId)
     )
+  )
+
+  useEffect(() => {
+    const watchedContent = LocalStorage.watchedContent.get(courseId)
+
+    if (!watchedContent) return
+
+    setWatchedContentId(watchedContent)
+  }, [courseId])
+
+  const classGroupsWithDone = useMemo(() => {
+    return classGroups.map((classGroup) => ({
+      ...classGroup,
+      classes: classGroup.classes.map((classItem) => ({
+        ...classItem,
+        done: watchedContentId.includes(classItem.id),
+      })),
+    }))
+  }, [watchedContentId, classGroups])
+
+  const handleCheck = useCallback(
+    (classId: string) => {
+      const newWatchedContent = LocalStorage.watchedContent.toggle(
+        courseId,
+        classId
+      )
+
+      if (!newWatchedContent) {
+        return
+      }
+
+      setWatchedContentId(newWatchedContent)
+    },
+    [courseId]
   )
 
   return (
@@ -29,7 +66,7 @@ export function PlayerPlaylist({
       </div>
 
       <ol className="overflow-auto overflow-primary">
-        {classGroups.map((classGroup, index) => (
+        {classGroupsWithDone.map((classGroup, index) => (
           <li key={classGroup.title}>
             <PlayerClassGroup
               {...classGroup}
@@ -42,7 +79,7 @@ export function PlayerPlaylist({
               onPlay={(classId) =>
                 router.push(`/player/${courseId}/${classId}`)
               }
-              onCheck={(classId) => console.log(classId)}
+              onCheck={(classId) => handleCheck(classId)}
             />
           </li>
         ))}

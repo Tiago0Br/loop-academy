@@ -24,17 +24,19 @@ export function PlayerClass({
 
   return (
     <button className="flex gap-6 p-4 items-center" onClick={onPlay}>
-      {done ? (
-        <MdCheckCircle size={24} className="min-w-6 text-green-400" />
-      ) : (
-        <div className="group" onClick={handleCheck}>
-          <MdPlayCircleOutline
-            size={24}
-            className="min-w-6 group-hover:hidden"
-          />
-          <MdCircle size={24} className="hidden min-w-6 group-hover:block" />
-        </div>
-      )}
+      <div className="group" onClick={handleCheck}>
+        {done ? (
+          <MdCheckCircle size={24} className="min-w-6 text-green-400" />
+        ) : (
+          <>
+            <MdPlayCircleOutline
+              size={24}
+              className="min-w-6 group-hover:hidden"
+            />
+            <MdCircle size={24} className="hidden min-w-6 group-hover:block" />
+          </>
+        )}
+      </div>
 
       <div className="flex flex-col gap-1 items-start">
         <p
