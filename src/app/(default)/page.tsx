@@ -4,7 +4,7 @@ import { APIYoutube } from '@/shared/services/api-youtube'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'CodarSe - Página inicial',
+  title: 'Loop Academy - Página inicial',
 }
 
 export default async function Home() {

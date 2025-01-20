@@ -6,7 +6,7 @@
   --color-text: #fff;
   --color-error: #980000;
   --color-paper: #232323;
-  --color-primary: #009688;
+  --color-primary: #5B68B0;
   --color-background: #000000;
   --color-primary-contrast: #fff;
 }
@@ -15,7 +15,7 @@ html[light] {
   --color-text: #000;
   --color-error: #980000;
   --color-paper: #fff;
-  --color-primary: #009688;
+  --color-primary: #5B68B0;
   --color-background: #cacaca;
   --color-primary-contrast: #fff;
 }

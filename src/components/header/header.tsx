@@ -3,10 +3,10 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { MdMenu, MdOutlineOpenInNew } from 'react-icons/md'
+import { MdMenu } from 'react-icons/md'
 
 export function Header() {
-  const [title, setTitle] = useState('CodarSe')
+  const [title, setTitle] = useState('Loop Academy')
   const [drawserVisible, setDrawserVisible] = useState(false)
   const currentPath = usePathname()
 
@@ -38,7 +38,7 @@ export function Header() {
             className="outline-offset-4 uppercase font-bold border-2 rounded-md py-2 px-1"
             href="/"
           >
-            codaserse
+            Loop Academy
           </Link>
         </li>
         <li className="hidden sm:inline">
@@ -59,7 +59,7 @@ export function Header() {
             Cursos
           </Link>
         </li>
-        <li className="hidden sm:inline">
+        {/* <li className="hidden sm:inline">
           <Link
             href="https://blog.codarse.com"
             target="_blank"
@@ -68,7 +68,7 @@ export function Header() {
             Blog
             <MdOutlineOpenInNew />
           </Link>
-        </li>
+        </li> */}
       </ul>
 
       <div
@@ -102,7 +102,7 @@ export function Header() {
               Cursos
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link
               href="https://blog.codarse.com"
               target="_blank"
@@ -111,7 +111,7 @@ export function Header() {
               Blog
               <MdOutlineOpenInNew />
             </Link>
-          </li>
+          </li> */}
         </ul>
       </div>
 

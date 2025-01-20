@@ -3,7 +3,7 @@ import { APIYoutube } from '@/shared/services/api-youtube'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'CodarSe - Todos os cursos',
+  title: 'Loop Academy - Todos os cursos',
 }
 
 export default async function Cursos() {
