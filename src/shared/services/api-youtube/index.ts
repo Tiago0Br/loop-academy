@@ -20,15 +20,17 @@ const YoutubeApiClient = youtube({
 export const APIYoutube = {
   course: {
     getAll: async () => {
+      const coursesIds = process.env.YOUTUBE_COURSES_IDS!.split(',')
+
       const { data } = await YoutubeApiClient.playlists.list(
         {
+          id: coursesIds,
           maxResults: 50,
           part: ['snippet'],
-          channelId: process.env.YOUTUBE_CHANNEL_ID,
         },
         {
           fetchImplementation: fetchWithNextConfig({
-            revalidate: 60 * 60 * 48,
+            revalidate: 60 * 60 * 12,
           }),
         }
       )
@@ -45,7 +47,7 @@ export const APIYoutube = {
           }
         }) ?? []
 
-      return courses.filter((course) => course.description.includes('#CODARSE'))
+      return courses
     },
     getById: async (id: string) => {
       const {
@@ -107,7 +109,7 @@ export const APIYoutube = {
               .match(/CODARSE - .*/)
               ?.at(0)
               ?.replace('CODARSE - ', '')
-              .trim() || ''
+              .trim() || courseItem.snippet?.title!
 
           const previousGroup = previous.at(previous.length - 1)
           const previousGroupTitle = previousGroup?.title
