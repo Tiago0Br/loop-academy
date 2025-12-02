@@ -9,7 +9,7 @@ interface ICollapsibleTextProps {
 
 export function CollapsibleText({
   numberOfLinesWhenClosed = 2,
-  children,
+  children
 }: ICollapsibleTextProps) {
   const [open, setOpen] = useState(false)
 
@@ -19,7 +19,7 @@ export function CollapsibleText({
         data-open={open}
         style={
           {
-            '--number-of-lines': numberOfLinesWhenClosed,
+            '--number-of-lines': numberOfLinesWhenClosed
           } as React.CSSProperties
         }
         className="data-[open=false]:line-clamp-[var(--number-of-lines)]"

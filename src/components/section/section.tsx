@@ -2,7 +2,7 @@
 
 import { MdOutlineChevronLeft, MdOutlineChevronRight } from 'react-icons/md'
 import { useRef } from 'react'
-import { Card, ICardProps } from '@/components/card/card'
+import { Card, type ICardProps } from '@/components/card/card'
 
 interface ISectionProps {
   title: string
@@ -19,7 +19,7 @@ export function Section({ title, variant = 'grid', items }: ISectionProps) {
     if (direction === 'left') {
       scrollRef.current.scrollBy({
         left: -300,
-        behavior: 'smooth',
+        behavior: 'smooth'
       })
 
       return
@@ -27,7 +27,7 @@ export function Section({ title, variant = 'grid', items }: ISectionProps) {
 
     scrollRef.current.scrollBy({
       left: 300,
-      behavior: 'smooth',
+      behavior: 'smooth'
     })
   }
 

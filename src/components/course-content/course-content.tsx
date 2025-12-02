@@ -1,4 +1,4 @@
-import { ClassGroup, IClassGroupProps } from './class-group'
+import { ClassGroup, type IClassGroupProps } from './class-group'
 
 interface ICourseContentProps {
   classGroups: IClassGroupProps[]

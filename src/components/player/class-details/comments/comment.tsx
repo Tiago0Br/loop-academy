@@ -21,7 +21,7 @@ export function Comment({
   likesCount,
   publishedAt,
   author,
-  replies = [],
+  replies = []
 }: ICommentProps) {
   const [showReplies, setShowReplies] = useState(false)
   const date = useMemo(() => {

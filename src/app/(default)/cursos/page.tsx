@@ -1,9 +1,9 @@
 import { Section } from '@/components/section/section'
 import { APIYoutube } from '@/shared/services/api-youtube'
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Loop Academy - Todos os cursos',
+  title: 'Loop Academy - Todos os cursos'
 }
 
 export default async function Cursos() {

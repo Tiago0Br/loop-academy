@@ -1,4 +1,4 @@
-import { Comment, ICommentProps } from './comment'
+import { Comment, type ICommentProps } from './comment'
 
 interface ICommentsProps {
   comments?: ICommentProps[]

@@ -1,10 +1,10 @@
 import { KeepWatching } from '@/components/keep-watching/keep-watching'
 import { Section } from '@/components/section/section'
 import { APIYoutube } from '@/shared/services/api-youtube'
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Loop Academy - Página inicial',
+  title: 'Loop Academy - Página inicial'
 }
 
 export default async function Home() {

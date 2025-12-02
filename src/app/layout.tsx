@@ -8,7 +8,7 @@ const nunito = Nunito({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Loop Academy - Cursos gratuitos',
-  description: 'Portal de cursos gratuitos do Youtube em PT-BR',
+  description: 'Portal de cursos gratuitos do Youtube em PT-BR'
 }
 
 export default function RootLayout({ children }: IRootLayout) {

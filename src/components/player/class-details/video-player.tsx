@@ -6,7 +6,7 @@ import {
   useImperativeHandle,
   useMemo,
   useRef,
-  useState,
+  useState
 } from 'react'
 import { MdPlayCircle } from 'react-icons/md'
 import type TReactPlayer from 'react-player'
@@ -41,18 +41,14 @@ export const VideoPlayer = forwardRef<IVideoPlayerRef, IVideoPlayerProps>(
       return !!(secondsUntilEnd && secondsUntilEnd <= 30)
     }, [secondsUntilEnd])
 
-    useImperativeHandle(
-      playerRefToForward,
-      () => {
-        return {
-          setProgress(seconds) {
-            playerRef.current?.seekTo(seconds, 'seconds')
-            wrapperRef.current?.scrollIntoView({ behavior: 'smooth' })
-          },
+    useImperativeHandle(playerRefToForward, () => {
+      return {
+        setProgress(seconds) {
+          playerRef.current?.seekTo(seconds, 'seconds')
+          wrapperRef.current?.scrollIntoView({ behavior: 'smooth' })
         }
-      },
-      []
-    )
+      }
+    }, [])
 
     return (
       <div ref={wrapperRef} className="h-full">

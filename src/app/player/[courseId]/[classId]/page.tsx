@@ -1,6 +1,6 @@
 import { ClassDetails, PlayerHeader, PlayerPlaylist } from '@/components/player'
 import { APIYoutube } from '@/shared/services/api-youtube'
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 
 interface PlayerProps {
   params: {
@@ -22,7 +22,7 @@ export async function generateStaticParams(): Promise<PlayerProps['params'][]> {
 }
 
 export async function generateMetadata({
-  params: { classId },
+  params: { classId }
 }: PlayerProps): Promise<Metadata> {
   const classDetails = await APIYoutube.class.getById(classId)
 
@@ -34,13 +34,13 @@ export async function generateMetadata({
       type: 'video.episode',
       title: classDetails.title,
       description: classDetails.description,
-      videos: [`https://www.youtube.com/watch?v=${classDetails.videoId}`],
-    },
+      videos: [`https://www.youtube.com/watch?v=${classDetails.videoId}`]
+    }
   }
 }
 
 export default async function PlayerPage({
-  params: { courseId, classId },
+  params: { courseId, classId }
 }: PlayerProps) {
   const courseDetails = await APIYoutube.course.getById(courseId)
   const classDetails = await APIYoutube.class.getById(classId)
@@ -70,7 +70,7 @@ export default async function PlayerPage({
             title: courseDetails.title,
             description: courseDetails.description,
             numberOfClasses: courseDetails.numberOfClasses,
-            classGroups: courseDetails.classGroups,
+            classGroups: courseDetails.classGroups
           }}
           classItem={{
             id: classId,
@@ -79,7 +79,7 @@ export default async function PlayerPage({
             videoId: classDetails.videoId,
             likesCount: classDetails.likesCount,
             commentsCount: classDetails.commentsCount,
-            viewsCount: classDetails.viewsCount,
+            viewsCount: classDetails.viewsCount
           }}
           comments={comments}
         />

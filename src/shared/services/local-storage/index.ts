@@ -22,7 +22,7 @@ export const LocalStorage = {
     },
     remove: () => {
       localStorage.removeItem(KEEP_WATCHING_LOCAL_STORAGE_KEY)
-    },
+    }
   },
   watchedContent: {
     get: (courseId: string): string[] | null => {
@@ -76,6 +76,6 @@ export const LocalStorage = {
       )
 
       return watchedContent[courseId] ?? null
-    },
-  },
+    }
+  }
 }

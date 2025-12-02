@@ -15,7 +15,7 @@ export function StartCourse({
   title,
   courseId,
   classId,
-  imageUrl,
+  imageUrl
 }: IStartCourseProps) {
   const [ref, inView] = useInView({ threshold: 0.2, initialInView: true })
 
@@ -28,7 +28,7 @@ export function StartCourse({
         <Link
           href={`/player/${courseId}/${classId}`}
           style={{
-            backgroundImage: `url(${imageUrl})`,
+            backgroundImage: `url(${imageUrl})`
           }}
           className="w-full bg-cover bg-no-repeat aspect-video bg-center rounded-md"
         >

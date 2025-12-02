@@ -1,20 +1,20 @@
-import { IClassItem } from '@/components/player'
-import { ICommentProps } from '@/components/player/class-details/comments/comment'
-import { youtube, youtube_v3 } from '@googleapis/youtube'
+import type { IClassItem } from '@/components/player'
+import type { ICommentProps } from '@/components/player/class-details/comments/comment'
+import { youtube, type youtube_v3 } from '@googleapis/youtube'
 
 const fetchWithNextConfig =
   (nextConfig?: NextFetchRequestConfig): typeof fetch =>
   (input, params = {}) => {
     return fetch(input, {
       ...params,
-      ...nextConfig,
+      ...nextConfig
     })
   }
 
 const YoutubeApiClient = youtube({
   version: 'v3',
   auth: process.env.YOUTUBE_API_KEY,
-  fetchImplementation: fetchWithNextConfig(),
+  fetchImplementation: fetchWithNextConfig()
 })
 
 export const APIYoutube = {
@@ -26,12 +26,12 @@ export const APIYoutube = {
         {
           id: coursesIds,
           maxResults: 50,
-          part: ['snippet'],
+          part: ['snippet']
         },
         {
           fetchImplementation: fetchWithNextConfig({
-            revalidate: 60 * 60 * 12,
-          }),
+            revalidate: 60 * 60 * 12
+          })
         }
       )
 
@@ -43,7 +43,7 @@ export const APIYoutube = {
             id: id ?? '',
             title: snippet?.title ?? '',
             description: snippet?.description ?? '',
-            thumbnail: snippet?.thumbnails?.high?.url ?? '',
+            thumbnail: snippet?.thumbnails?.high?.url ?? ''
           }
         }) ?? []
 
@@ -51,17 +51,17 @@ export const APIYoutube = {
     },
     getById: async (id: string) => {
       const {
-        data: { items: [courseItem] = [] },
+        data: { items: [courseItem] = [] }
       } = await YoutubeApiClient.playlists.list(
         {
           id: [id],
           maxResults: 1,
-          part: ['snippet'],
+          part: ['snippet']
         },
         {
           fetchImplementation: fetchWithNextConfig({
-            revalidate: 60 * 60 * 48,
-          }),
+            revalidate: 60 * 60 * 48
+          })
         }
       )
 
@@ -74,12 +74,12 @@ export const APIYoutube = {
             playlistId: id,
             maxResults: 50,
             part: ['snippet'],
-            pageToken: nextPageToken,
+            pageToken: nextPageToken
           },
           {
             fetchImplementation: fetchWithNextConfig({
-              revalidate: 60 * 60 * 24,
-            }),
+              revalidate: 60 * 60 * 24
+            })
           }
         )
 
@@ -101,7 +101,7 @@ export const APIYoutube = {
         .map((youtubePlaylistItem) => ({
           id: youtubePlaylistItem.id ?? '',
           title: youtubePlaylistItem.snippet?.title ?? '',
-          description: youtubePlaylistItem.snippet?.description ?? '',
+          description: youtubePlaylistItem.snippet?.description ?? ''
         }))
         .reduce<TGroupWithClass[]>((previous, current) => {
           const currentGroupTitle =
@@ -117,7 +117,7 @@ export const APIYoutube = {
           if (previousGroup && previousGroupTitle === currentGroupTitle) {
             previousGroup.classes.push({
               id: current.id,
-              title: current.title,
+              title: current.title
             })
           } else {
             previous.push({
@@ -126,9 +126,9 @@ export const APIYoutube = {
               classes: [
                 {
                   id: current.id,
-                  title: current.title,
-                },
-              ],
+                  title: current.title
+                }
+              ]
             })
           }
 
@@ -141,20 +141,20 @@ export const APIYoutube = {
         description: courseItem.snippet?.description ?? '',
         thumbnail: courseItem.snippet?.thumbnails?.high?.url ?? '',
         classGroups,
-        numberOfClasses: classes.length,
+        numberOfClasses: classes.length
       }
-    },
+    }
   },
   class: {
     getById: async (id: string): Promise<IClassItem> => {
       const {
-        data: { items: [classItem] = [] },
+        data: { items: [classItem] = [] }
       } = await YoutubeApiClient.playlistItems.list(
         { id: [id], part: ['contentDetails'] },
         {
           fetchImplementation: fetchWithNextConfig({
-            revalidate: 60 * 60 * 24,
-          }),
+            revalidate: 60 * 60 * 24
+          })
         }
       )
 
@@ -162,17 +162,17 @@ export const APIYoutube = {
       if (!videoId) throw new Error('Video id not found')
 
       const {
-        data: { items: [videoItem] = [] },
+        data: { items: [videoItem] = [] }
       } = await YoutubeApiClient.videos.list(
         {
           id: [videoId],
           maxResults: 1,
-          part: ['snippet', 'statistics'],
+          part: ['snippet', 'statistics']
         },
         {
           fetchImplementation: fetchWithNextConfig({
-            revalidate: 60 * 60 * 48,
-          }),
+            revalidate: 60 * 60 * 48
+          })
         }
       )
 
@@ -186,7 +186,7 @@ export const APIYoutube = {
         description: String(videoItem.snippet.description),
         viewsCount: Number(videoItem.statistics.viewCount),
         likesCount: Number(videoItem.statistics.likeCount),
-        commentsCount: Number(videoItem.statistics.commentCount),
+        commentsCount: Number(videoItem.statistics.commentCount)
       }
     },
     getAllByCourseId: async (courseId: string) => {
@@ -200,12 +200,12 @@ export const APIYoutube = {
               playlistId: courseId,
               part: ['snippet'],
               maxResults: 50,
-              pageToken: nextPageToken,
+              pageToken: nextPageToken
             },
             {
               fetchImplementation: fetchWithNextConfig({
-                revalidate: 60 * 60 * 24,
-              }),
+                revalidate: 60 * 60 * 24
+              })
             }
           )
           .then(({ data }) => {
@@ -217,10 +217,10 @@ export const APIYoutube = {
       return (
         classes.map((classItem) => ({
           courseId,
-          classId: classItem.id ?? '',
+          classId: classItem.id ?? ''
         })) ?? []
       )
-    },
+    }
   },
   comments: {
     getAllByVideoId: async (videoId: string): Promise<ICommentProps[]> => {
@@ -228,12 +228,12 @@ export const APIYoutube = {
         {
           part: ['snippet', 'replies'],
           videoId,
-          maxResults: 50,
+          maxResults: 50
         },
         {
           fetchImplementation: fetchWithNextConfig({
-            revalidate: 60 * 60 * 24,
-          }),
+            revalidate: 60 * 60 * 24
+          })
         }
       )
 
@@ -248,7 +248,7 @@ export const APIYoutube = {
               item.snippet?.topLevelComment?.snippet?.authorDisplayName ?? '',
             image:
               item.snippet?.topLevelComment?.snippet?.authorProfileImageUrl ??
-              '',
+              ''
           },
           replies:
             item.replies?.comments?.map((reply) => ({
@@ -257,11 +257,11 @@ export const APIYoutube = {
               publishedAt: reply.snippet?.publishedAt ?? '',
               author: {
                 name: reply.snippet?.authorDisplayName ?? '',
-                image: reply.snippet?.authorProfileImageUrl ?? '',
-              },
-            })) ?? [],
+                image: reply.snippet?.authorProfileImageUrl ?? ''
+              }
+            })) ?? []
         })) ?? []
       )
-    },
-  },
+    }
+  }
 }

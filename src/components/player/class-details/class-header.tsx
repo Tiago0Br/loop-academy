@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 import { UrlMatcher } from 'interweave-autolink'
 import { useMemo } from 'react'
-import { MatcherInterface } from 'interweave'
+import type { MatcherInterface } from 'interweave'
 
 const Interweave = dynamic(
   () => import('interweave').then((mod) => mod.Interweave),
@@ -17,7 +17,7 @@ interface IClassHeaderProps {
 export function ClassHeader({
   title,
   description,
-  onTimeClick,
+  onTimeClick
 }: IClassHeaderProps) {
   const urlMatcher = useMemo(
     () =>
@@ -61,9 +61,9 @@ export function ClassHeader({
           valid: true,
           match: firstElement,
           index: result.index,
-          length: firstElement.length,
+          length: firstElement.length
         }
-      },
+      }
     } satisfies MatcherInterface
   }, [onTimeClick])
 

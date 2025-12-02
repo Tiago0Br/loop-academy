@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic'
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import { StartCourse } from '@/components/start-course/start-course'
 import { CourseContent } from '@/components/course-content/course-content'
 import { APIYoutube } from '@/shared/services/api-youtube'
@@ -24,12 +24,12 @@ export async function generateStaticParams(): Promise<
   const courses = await APIYoutube.course.getAll()
 
   return courses.map((course) => ({
-    id: course.id,
+    id: course.id
   }))
 }
 
 export async function generateMetadata({
-  params: { id },
+  params: { id }
 }: CourseDetailsProps): Promise<Metadata> {
   const courseDetail = await APIYoutube.course.getById(id)
 
@@ -41,13 +41,13 @@ export async function generateMetadata({
       type: 'video.other',
       title: courseDetail.title,
       images: courseDetail.thumbnail,
-      description: courseDetail.description,
-    },
+      description: courseDetail.description
+    }
   }
 }
 
 export default async function CourseDetailsPage({
-  params: { id },
+  params: { id }
 }: CourseDetailsProps) {
   const courseDetail = await APIYoutube.course.getById(id)
   const firstClass = courseDetail.classGroups.at(0)?.classes.at(0)

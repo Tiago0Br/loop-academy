@@ -6,8 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "lint:fix": "next lint --fix"
+    "lint": "biome lint --write src",
+    "format": "biome format --write src"
   },
   "dependencies": {
     "@googleapis/youtube": "^20.0.0",
@@ -24,13 +24,12 @@
     "react-player": "^2.16.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.3.8",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.4",
     "postcss": "^8",
-    "tailwindcss": "^3.4.1",
+    "tailwindcss": "3.4.17",
     "typescript": "^5.4.5"
   }
 }

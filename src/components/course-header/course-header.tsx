@@ -13,7 +13,7 @@ interface ICourseHeaderProps {
 export function CourseHeader({
   title,
   description,
-  numberOfClasses,
+  numberOfClasses
 }: ICourseHeaderProps) {
   return (
     <div className="flex flex-col gap-2">

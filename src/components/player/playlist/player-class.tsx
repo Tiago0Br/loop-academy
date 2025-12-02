@@ -15,7 +15,7 @@ export function PlayerClass({
   playing,
   done,
   onPlay,
-  onCheck,
+  onCheck
 }: IPlayerClassProps) {
   function handleCheck(e: React.MouseEvent<HTMLDivElement>) {
     e.stopPropagation()

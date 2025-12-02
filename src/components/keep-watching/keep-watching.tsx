@@ -3,7 +3,10 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { MdPlayCircle } from 'react-icons/md'
-import { IKeepWatching, LocalStorage } from '@/shared/services/local-storage'
+import {
+  type IKeepWatching,
+  LocalStorage
+} from '@/shared/services/local-storage'
 
 export function KeepWatching() {
   const [data, setData] = useState<IKeepWatching | null>(null)

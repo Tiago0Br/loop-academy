@@ -6,11 +6,11 @@ import * as Tabs from '@radix-ui/react-tabs'
 import { MdThumbUp, MdVisibility } from 'react-icons/md'
 import { CourseHeader } from '@/components/course-header/course-header'
 import { LocalStorage } from '@/shared/services/local-storage'
-import { IPlayerClassGroupProps } from '../playlist/player-class-group'
-import { VideoPlayer, IVideoPlayerRef } from './video-player'
+import type { IPlayerClassGroupProps } from '../playlist/player-class-group'
+import { VideoPlayer, type IVideoPlayerRef } from './video-player'
 import { ClassHeader } from './class-header'
 import { Comments } from './comments/comments'
-import { ICommentProps } from './comments/comment'
+import type { ICommentProps } from './comments/comment'
 import { PlayerPlaylist } from '../playlist/player-playlist'
 
 export interface IClassItem {
@@ -40,7 +40,7 @@ interface IClassDetailsProps {
 export function ClassDetails({
   course,
   classItem,
-  comments = [],
+  comments = []
 }: IClassDetailsProps) {
   const router = useRouter()
   const nextClassId = useMemo(() => {
@@ -78,7 +78,7 @@ export function ClassDetails({
       courseId: course.id,
       courseName: course.title,
       classId: classItem.id,
-      className: classItem.title,
+      className: classItem.title
     })
   }, [course.id, course.title, classItem.id, classItem.title])
 

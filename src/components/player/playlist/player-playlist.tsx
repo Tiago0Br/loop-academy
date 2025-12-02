@@ -1,7 +1,10 @@
 'use client'
 
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { IPlayerClassGroupProps, PlayerClassGroup } from './player-class-group'
+import {
+  type IPlayerClassGroupProps,
+  PlayerClassGroup
+} from './player-class-group'
 import { useRouter } from 'next/navigation'
 import { LocalStorage } from '@/shared/services/local-storage'
 
@@ -14,7 +17,7 @@ interface IPlayerPlaylistProps {
 export function PlayerPlaylist({
   courseId,
   classGroups,
-  playingClassId,
+  playingClassId
 }: IPlayerPlaylistProps) {
   const router = useRouter()
 
@@ -38,8 +41,8 @@ export function PlayerPlaylist({
       ...classGroup,
       classes: classGroup.classes.map((classItem) => ({
         ...classItem,
-        done: watchedContentId.includes(classItem.id),
-      })),
+        done: watchedContentId.includes(classItem.id)
+      }))
     }))
   }, [watchedContentId, classGroups])
 

@@ -1,7 +1,7 @@
 'use client'
 
 import { MdKeyboardArrowDown, MdKeyboardArrowRight } from 'react-icons/md'
-import { IPlayerClassProps, PlayerClass } from './player-class'
+import { type IPlayerClassProps, PlayerClass } from './player-class'
 
 export interface IPlayerClassGroupProps {
   title: string
@@ -22,7 +22,7 @@ export function PlayerClassGroup({
   playingClassId,
   onToggle,
   onPlay,
-  onCheck,
+  onCheck
 }: IPlayerClassGroupProps) {
   function getFinishedClasses() {
     return classes.filter(({ done }) => done)

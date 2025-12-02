@@ -3,53 +3,48 @@
 @tailwind utilities;
 
 :root {
-  --color-text: #fff;
-  --color-error: #980000;
-  --color-paper: #232323;
-  --color-primary: #5B68B0;
-  --color-background: #000000;
-  --color-primary-contrast: #fff;
+	--color-text: #fff;
+	--color-error: #980000;
+	--color-paper: #232323;
+	--color-primary: #5b68b0;
+	--color-background: #000000;
+	--color-primary-contrast: #fff;
 }
 
 html[light] {
-  --color-text: #000;
-  --color-error: #980000;
-  --color-paper: #fff;
-  --color-primary: #5B68B0;
-  --color-background: #cacaca;
-  --color-primary-contrast: #fff;
+	--color-text: #000;
+	--color-error: #980000;
+	--color-paper: #fff;
+	--color-primary: #5b68b0;
+	--color-background: #cacaca;
+	--color-primary-contrast: #fff;
 }
 
 * {
-  @apply outline-primary outline-1 -outline-offset-2
-}
-
-html,
-body {
-  overflow: overlay;
-  @apply bg-background text-text w-screen h-screen underline-offset-4;
+	@apply outline-primary outline-1 -outline-offset-2 } html, body { overflow: overlay;
+	@apply bg-background text-text w-screen h-screen underline-offset-4;
 }
 
 a {
-  @apply hover:underline active:opacity-50 transition-opacity;
+	@apply hover:underline active:opacity-50 transition-opacity;
 }
 
 .overflow-primary::-webkit-scrollbar-thumb {
-  @apply bg-primary;
+	@apply bg-primary;
 }
 
 *::-webkit-scrollbar {
-  @apply w-2 h-3;
+	@apply w-2 h-3;
 }
 
 *::-webkit-scrollbar-button {
-  @apply hidden;
+	@apply hidden;
 }
 
 *::-webkit-scrollbar-corner {
-  @apply bg-transparent;
+	@apply bg-transparent;
 }
 
 *::-webkit-scrollbar-thumb {
-  @apply bg-paper rounded-full;
+	@apply bg-paper rounded-full;
 }
